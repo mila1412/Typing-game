@@ -115,6 +115,7 @@
         // 顯示分數
         $('#text-score').text(score)
         $('.card').remove()
+        // 產生字串
         move()
         if ($('#zom img').length <= 0) {
           clearInterval(timer)
@@ -127,11 +128,10 @@
           $('#h1').html('')
           $('.card').remove()
           $('#zom img').remove()
-          // 不是 $(this).attr('disabled', false)
           $('#btn-start').attr('disabled', false)
         }
       }
-    });
+    })
 
     const move = () => {
       // 初始化
@@ -152,6 +152,7 @@
     }
 
     const dance = (zb) => {
+      console.log('dance')
       zb.stop().animate({
         left: Math.round(Math.random() * 90) + '%',
         top: Math.round(Math.random() * 70) + '%'
@@ -159,8 +160,6 @@
         dance(zb)
       })
     }
-
-
 
     $('#btn-start').click(function () {
       $(this).attr('disabled', true)
@@ -180,24 +179,24 @@
             text: `Your score: ${score}`
           })
           $('#h1').html('')
-          // 按開始鍵跟輸入整排正確的字時都要清空字串
+          // 結束時跟輸入整排正確的字時都要清空字串
           $('.card').remove()
           $('#zom img').remove()
           $(this).attr('disabled', false)
         }
       }, 1000);
 
+      // 產生一隻就呼叫 dance 函式，包在函式裡所以幾乎同時五隻一起出來
       for (let i = 1; i <= 5; i++) {
         const zb = $(`<img src="./images/zombie.gif" title="打不到勒" style="left:${Math.round(Math.random() * 90)}%;top:${Math.round(Math.random() * 70)}%">`)
         $('#zom').append(zb)
+        console.log(i)
         dance(zb)
       }
 
+      // 產生字串
       move()
     })
-
-
-
   </script>
 </body>
 
